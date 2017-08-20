@@ -1,2 +1,4 @@
 # ANUMP1
-Primero Proyecto para la materia Analisis Numerico.
+Primer Proyecto para la materia Analisis Numerico.
+
+#Baruc was here
