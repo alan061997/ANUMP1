@@ -28,7 +28,7 @@ def error_aproximado(act, ant):
 def printable_Ea(var, act, ant):
     Ea = abs((act-ant)/act * 100)
     return "Ea({}) = {}%".format(var, Ea)
-	
+
 def gauss_seidel(matrix, max_error):
     x_ant = [0,0,0]
     x_act = [0,0,0]
@@ -40,7 +40,7 @@ def gauss_seidel(matrix, max_error):
         error = max(errors)
         x_ant = x_act
         iters+=1
-    return x_act, error, iters
+    return {"valores": x_act, "ea": error, "iters": iters}
 
 """
 #Prueba de escritorio:

@@ -132,9 +132,22 @@ def datos_usuario():
 	return {"matrix": matriz,"vars": variables,"ea": error_max}
 
 #----------------------------------------------------------------------------#
+
+def imprimeResultados(r, vars):
+	print("------------")
+	print("Resultados:")
+	for var, val in zip(vars,r["valores"]):
+		print("{}: {}".format(var, val))
+	print("Ea = {}".format(r["ea"]))
+	print("Iteraciones = {}".format(r["iters"]))
+	print("------------")
+
+#----------------------------------------------------------------------------#
+
 #Solucion del sistema:
-d = datos_usuario()
-print("Matriz = {}, vars={}, error={}".format(d["matrix"], d["vars"], d["ea"]))
+d = datos_usuario() #adquiere datos
+r = gs.gauss_seidel(d["matrix"], d["ea"]) #procesa datos
+imprimeResultados(r, d["vars"])#despliega resultados
 
 
 
