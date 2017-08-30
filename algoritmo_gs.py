@@ -9,7 +9,7 @@ def despejar(lista, idx):
             l_out.append(0) #el despejado, se agrega para no perder la referencia por indice de las demas
     return l_out
 
-#funcion que calcula una iteración de Xn para dadas Xn anteriores y la matriz a resolver
+#funcion que calcula una iteracion de Xn para dadas Xn anteriores y la matriz a resolver
 def calc_iter(matrix, x_ant):
     x_act = list(x_ant)
     for i, row in enumerate(matrix):
