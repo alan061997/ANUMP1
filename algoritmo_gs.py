@@ -29,7 +29,7 @@ def printable_Ea(var, act, ant):
     Ea = abs((act-ant)/act * 100)
     return "Ea({}) = {}%".format(var, Ea)
 	
-def gauss_siegel(matrix, max_error):
+def gauss_seidel(matrix, max_error):
     x_ant = [0,0,0]
     x_act = [0,0,0]
     error = 100.0
