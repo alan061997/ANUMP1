@@ -30,8 +30,8 @@ def printable_Ea(var, act, ant):
     return "Ea({}) = {}%".format(var, Ea)
 
 def gauss_seidel(matrix, max_error):
-    x_ant = [0 for i in range(len(matrix))]
-    x_act = [0 for i in range(len(matrix))]
+    x_ant = [0.1 for i in range(len(matrix))]
+    x_act = [0.1 for i in range(len(matrix))]
     error = 100.0
     iters = 0
     while error >= max_error:

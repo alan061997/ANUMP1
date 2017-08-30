@@ -11,12 +11,38 @@
 
 import algoritmo_gs as gs
 import string 
+import os
 
 n_points = "!#$%&'*,/:;<>?@[\]^_`{|}~"
 p_points = "+-="
 
 cont_1 = 0
 cont_2 = 0
+
+def is_number(num):
+    try:
+        float(num)
+        if float(num) >= 0:
+            return 1
+        else:
+            print ("No es un numero positivo")
+            return 0
+    except ValueError:
+        print ("No es un numero")
+        return 0
+		
+#----------------------------------------------------------------------------#
+def primer_pantalla():
+    os.system("cls")
+    print ("{}{}\n{}{}{}\n{}".format('\n'*0,'-'*160, '-'*35, " Bienvenidos ", '-'*32, '-'*160))
+    print ("\n\n\n\t\t\t{}\n\n\t\t\t{}\n\t\t{}\n".format("Analisis Numerico - 5to Semestre", "Proyecto #1 - Metodo Gauss-Seidel", ""))
+    print ("{}\t{}\n\n\t\t{}\t\t\t{}\n".format("\n"*1,"Integrantes: ", "Alberto Alan Zul Rabasa", "1635501", ))
+    print ("\t\t{}\t\t{}\n".format("Rafael Baruc Almager Lopez", "1443335"))
+    print ("\t\t{}\t\t{}\n\t".format("Luis Alberto Rodriguez Matrinez", "1791361"))
+    print ("\n\n\n{}".format("-"*(80*4)))
+    os.system("pause")
+    os.system("cls")
+#----------------------------------------------------------------------------#
 
 #----------------------------------------------------------------------------#
 
@@ -74,7 +100,7 @@ def eliminar_char(ecuacion, matriz):
     return ecuacion
 
 
-def n_eq(cont_1, cont_2, eq, variables, matriz):
+def n_eq(cont_1, cont_2, eq, variables, matriz, ecuacion):
     for i in range(len(eq)):
         try:
             #print ("{}[{}] in {}[{}]".format(variables[cont_1], cont_1, eq[i], i))
@@ -97,7 +123,7 @@ def n_eq(cont_1, cont_2, eq, variables, matriz):
     if cont_2 == 0:
         eq = "Error"
         eq = eliminar_char(ecuacion, matriz)
-        n_eq(0,0,eq, variables, matriz)
+        n_eq(0,0,eq, variables, matriz, ecuacion)
     else:
         matriz += [eq]
     eq[len(eq)-1] = float(eq[len(eq)-1])
@@ -108,8 +134,12 @@ def n_eq(cont_1, cont_2, eq, variables, matriz):
 def datos_usuario():
 	ecuacion = "Error"
 	matriz = [[1]]
-	variables = [ ]
-	error_max = 1.0
+	variables = [ ]	
+	
+	while (1):
+		m_error = input("Margen de error deseado(%): ")
+		if is_number(m_error) is not 0:
+			break
 	
 	eq = eliminar_char(ecuacion, matriz)
 
@@ -127,9 +157,8 @@ def datos_usuario():
 
 	for i in range(len(matriz[0])-2):
 		eq = eliminar_char(ecuacion, matriz)
-		matriz = n_eq(cont_1, cont_2, eq, variables, matriz)
-
-	return {"matrix": matriz,"vars": variables,"ea": error_max}
+		matriz = n_eq(cont_1, cont_2, eq, variables, matriz, ecuacion)
+	return {"matrix": matriz,"vars": variables,"ea": float(m_error)}
 
 #----------------------------------------------------------------------------#
 
@@ -145,9 +174,10 @@ def imprimeResultados(r, vars):
 #----------------------------------------------------------------------------#
 
 #Solucion del sistema:
+primer_pantalla()
 d = datos_usuario() #adquiere datos
 r = gs.gauss_seidel(d["matrix"], d["ea"]) #procesa datos
 imprimeResultados(r, d["vars"])#despliega resultados
 
-
+os.system("pause")
 
