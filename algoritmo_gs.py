@@ -48,6 +48,6 @@ R1 = [3.0, -0.1, -0.2, 7.85]
 R2 = [0.1, 7.0, -0.3, -19.3]
 R3 = [0.3, -0.2, 10, 71.4]
 matrix = [R1, R2, R3]
-gs = gauss_siegel(matrix, .1)
+gs = gauss_seidel(matrix, .1)
 print(gs)
 """
