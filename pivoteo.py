@@ -42,6 +42,7 @@ def mat_ordenada(m):
 
 #Bubble sort de filas
 def mat_ordenar(m):
+	assert mat_dominante(m), "Matriz debe ser dominante"
 	indices = mat_dom_index(m)
 	for j in range(len(m)):
 		for i, f in enumerate(m):
