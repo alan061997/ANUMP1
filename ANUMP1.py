@@ -9,15 +9,12 @@
 # In[4]:
 
 
+import algoritmo_gs as gs
 import string 
-
-ecuacion = "Error"
 
 n_points = "!#$%&'*,/:;<>?@[\]^_`{|}~"
 p_points = "+-="
 
-matriz = [[1]]
-variables = [ ]
 cont_1 = 0
 cont_2 = 0
 
@@ -108,32 +105,36 @@ def n_eq(cont_1, cont_2, eq, variables, matriz):
             
 #----------------------------------------------------------------------------#
 
-eq = eliminar_char(ecuacion, matriz)
+def datos_usuario():
+	ecuacion = "Error"
+	matriz = [[1]]
+	variables = [ ]
+	error_max = 1.0
+	
+	eq = eliminar_char(ecuacion, matriz)
 
-for i in range(len(eq)):
-    for c in eq[i]:
-        if c in string.ascii_letters:
-            variables.append(c)
-            eq[i] = eq[i].replace(c, "")
-            if eq[i] == "":
-                eq[i] = 0
-            else:
-                eq[i] = float(eq[i])
-eq[len(eq)-1] = float(eq[len(eq)-1])            
-matriz = [eq]
+	for i in range(len(eq)):
+		for c in eq[i]:
+			if c in string.ascii_letters:
+				variables.append(c)
+				eq[i] = eq[i].replace(c, "")
+				if eq[i] == "":
+					eq[i] = 0
+				else:
+					eq[i] = float(eq[i])
+	eq[len(eq)-1] = float(eq[len(eq)-1])            
+	matriz = [eq]
 
-for i in range(len(matriz[0])-2):
-    eq = eliminar_char(ecuacion, matriz)
-    matriz = n_eq(cont_1, cont_2, eq, variables, matriz)
-        
-for item in matriz:
-    print (item)
-        
-print (variables)
+	for i in range(len(matriz[0])-2):
+		eq = eliminar_char(ecuacion, matriz)
+		matriz = n_eq(cont_1, cont_2, eq, variables, matriz)
 
+	return {"matrix": matriz,"vars": variables,"ea": error_max}
 
-# In[ ]:
-
+#----------------------------------------------------------------------------#
+#Solucion del sistema:
+d = datos_usuario()
+print("Matriz = {}, vars={}, error={}".format(d["matrix"], d["vars"], d["ea"]))
 
 
 
