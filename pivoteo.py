@@ -5,6 +5,12 @@ r3 = [2, 1, 7]
 r4 = [2, 1, 3]
 r5 = [5, 2, 3]
 r6 = [3, 4, 5]
+
+#i = [3, 2, 0, 1]
+f0 = [1, 2, 3, 7]
+f1 = [2, 4, 9, 1]
+f2 = [15, 3, 6, 2]
+f3 = [4, 20, 5, 1]
 m = [r1, r2, r3]
 
 def fila_dominante(r):
@@ -27,14 +33,24 @@ def fila_dom_index(f):
 def mat_dom_index(m):
 	return [fila_dom_index(f) for f in m]
 
+def mat_ordenada(m):
+	indices = mat_dom_index(m)
+	if indices == sorted(indices):
+		return True
+	else:
+		return False
+
+#Bubble sort de filas
 def mat_ordenar(m):
 	indices = mat_dom_index(m)
-	for i, f in enumerate(m):
-		print("i = {}, i_max = {}".format(i, indices[i]))
-		if indices[i] != i:
-			print("cambiando")
-			ii = indices[i]
-			m[i], m[ii] = m[ii], m[i]
-			indices[i], indices[ii] = indices[ii], indices[i]
-			print("i = {}, i_max = {} (cambiados)".format(i, indices[i]))
+	for j in range(len(m)):
+		for i, f in enumerate(m):
+			print("i = {}, i_max = {}".format(i, indices[i]))
+			if indices[i] != i:
+				print("cambiando")
+				ii = indices[i]
+				m[i], m[ii] = m[ii], m[i]
+				indices[i], indices[ii] = indices[ii], indices[i]
+				print("i = {}, i_max = {} (cambiados)".format(i, indices[i]))
+			
 	return m
