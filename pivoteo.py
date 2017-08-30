@@ -45,12 +45,9 @@ def mat_ordenar(m):
 	indices = mat_dom_index(m)
 	for j in range(len(m)):
 		for i, f in enumerate(m):
-			print("i = {}, i_max = {}".format(i, indices[i]))
 			if indices[i] != i:
-				print("cambiando")
 				ii = indices[i]
 				m[i], m[ii] = m[ii], m[i]
 				indices[i], indices[ii] = indices[ii], indices[i]
-				print("i = {}, i_max = {} (cambiados)".format(i, indices[i]))
 			
 	return m
