@@ -56,19 +56,19 @@ def datos_dominante(d):
 		m = [r[0:-1] for r in m]
 		res_salvados = True
 
-	print ("\tmatriz = {}".format(m))
+	#print ("\tmatriz = {}".format(m))
 	if(mat_dominante(m)):
 		if(mat_ordenada(m)):
 			print("\tMatriz dominante y ordenada")
 		else:
 			print("\tMatriz dominante, ordenando...")
-			print("\tAntes: \n{}".format(m))
+			#print("\tAntes: \n{}".format(m))
 			m, res = mat_ordenar(m, res)
 			if (res_salvados):
 				m = [f+[r] for f, r in zip(m, res)]
 			d["matrix"] = m
 			print("\tMatriz ordenada!")
-			print("\tDespues: \n{}".format(m))
+			#print("\tDespues: \n{}".format(m))
 	else:
 		print("\tMatriz no dominante.")
 	return d
