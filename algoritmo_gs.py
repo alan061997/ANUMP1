@@ -1,7 +1,11 @@
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+def list_abs(l):
+	return [abs(c) for c in l]
+
 #Matriz dominante
 def fila_dominante(r):
-	return max(r) > (sum(r) - max(r))
+	rabs = list_abs(r)
+	return max(rabs) > (sum(rabs) - max(rabs))
 	
 def mat_dominante(m):
 	for r in m:
@@ -11,8 +15,9 @@ def mat_dominante(m):
 	
 def fila_dom_index(f):
 	assert fila_dominante(f) == True, "Fila debe ser dominante"
-	mx = max(f)
-	for i, e in enumerate(f):
+	fabs = list_abs(f)
+	mx = max(fabs)
+	for i, e in enumerate(fabs):
 		if e == mx:
 			return i
 	return -1
