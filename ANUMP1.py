@@ -176,6 +176,7 @@ def imprimeResultados(r, vars):
 #Solucion del sistema:
 primer_pantalla()
 d = datos_usuario() #adquiere datos
+d = gs.datos_dominante(d) #preprocesa datos (trata de hacer dominante la matriz)
 r = gs.gauss_seidel(d["matrix"], d["ea"]) #procesa datos
 imprimeResultados(r, d["vars"])#despliega resultados
 

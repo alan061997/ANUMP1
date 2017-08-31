@@ -1,3 +1,76 @@
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+#Matriz dominante
+def fila_dominante(r):
+	return max(r) > (sum(r) - max(r))
+	
+def mat_dominante(m):
+	for r in m:
+		if not fila_dominante(r):
+			return False
+	return True
+	
+def fila_dom_index(f):
+	assert fila_dominante(f) == True, "Fila debe ser dominante"
+	mx = max(f)
+	for i, e in enumerate(f):
+		if e == mx:
+			return i
+	return -1
+	
+def mat_dom_index(m):
+	return [fila_dom_index(f) for f in m]
+
+def mat_ordenada(m):
+	indices = mat_dom_index(m)
+	if indices == sorted(indices):
+		return True
+	else:
+		return False
+
+#Bubble sort de filas
+def mat_ordenar(m, r):
+	assert mat_dominante(m), "Matriz debe ser dominante"
+	indices = mat_dom_index(m)
+	for j in range(len(m)):
+		for i, f in enumerate(m):
+			if indices[i] != i:
+				ii = indices[i]
+				m[i], m[ii] = m[ii], m[i]
+				indices[i], indices[ii] = indices[ii], indices[i]
+				r[i], r[ii] = r[ii], r[i]
+			
+	return m, r
+
+def datos_dominante(d):
+	m = list(d["matrix"])
+	res = []
+	res_salvados = False
+	if len(m) != len(m[0]):
+		res = [r[-1] for r in m] #salva columna de resultados
+		#retira columna de resultados
+		m = [r[0:-1] for r in m]
+		res_salvados = True
+
+	print ("matriz = {}".format(m))
+	if(mat_dominante(m)):
+		if(mat_ordenada(m)):
+			print("Matriz dominante y ordenada")
+		else:
+			print("Matriz dominante, ordenando...")
+			print("antes: \n{}".format(m))
+			m, res = mat_ordenar(m, res)
+			if (res_salvados):
+				m = [f+[r] for f, r in zip(m, res)]
+			d["matrix"] = m
+			print("Matriz ordenada!")
+			print("despues: \n{}".format(m))
+	else:
+		print("Matriz no dominante :(")
+		print("Hare mi mejor esfuerzo!!!!")
+	return d
+		
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+
 #funcion que toma una lista y un elemento como argumento y lo "despeja" del resto:
 
 def despejar(lista, idx):
