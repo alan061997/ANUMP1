@@ -2,9 +2,13 @@
 import time
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#
+def list_abs(l):
+	return [abs(c) for c in l]
+
 #Matriz dominante
 def fila_dominante(r):
-	return max(r) > (sum(r) - max(r))
+	rabs = list_abs(r)
+	return max(rabs) > (sum(rabs) - max(rabs))
 	
 def mat_dominante(m):
 	for r in m:
@@ -14,8 +18,9 @@ def mat_dominante(m):
 	
 def fila_dom_index(f):
 	assert fila_dominante(f) == True, "Fila debe ser dominante"
-	mx = max(f)
-	for i, e in enumerate(f):
+	fabs = list_abs(f)
+	mx = max(fabs)
+	for i, e in enumerate(fabs):
 		if e == mx:
 			return i
 	return -1
@@ -54,19 +59,19 @@ def datos_dominante(d):
 		m = [r[0:-1] for r in m]
 		res_salvados = True
 
-	print ("\tmatriz = {}".format(m))
+	#print ("\tmatriz = {}".format(m))
 	if(mat_dominante(m)):
 		if(mat_ordenada(m)):
 			print("\tMatriz dominante y ordenada")
 		else:
 			print("\tMatriz dominante, ordenando...")
-			print("\tAntes: \n{}".format(m))
+			#print("\tAntes: \n{}".format(m))
 			m, res = mat_ordenar(m, res)
 			if (res_salvados):
 				m = [f+[r] for f, r in zip(m, res)]
 			d["matrix"] = m
 			print("\tMatriz ordenada!")
-			print("\tDespues: \n{}".format(m))
+			#print("\tDespues: \n{}".format(m))
 	else:
 		print("\tMatriz no dominante.")
 	return d
